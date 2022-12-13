@@ -22,6 +22,9 @@ The email should contain a link to a GitHub repository with:
 
     ```
     # Add your commands here
+    git add README.md
+    git commit -m "add README.md"
+    git push
     ```
 * A `wallet.py` file that passes the unit tests.
 * A `Dockerfile`.
@@ -71,7 +74,7 @@ page](https://jhale.github.io/computational-workflows/).
 1. Create a file `Dockerfile` in the repository containing the following text.
 
 ```
-FROM ubuntu:21.04
+FROM ubuntu:20.04
 
 RUN apt-get -y update && \
     apt-get install -y python3-minimal python3-ipython python3-pytest python3-numpy && \
@@ -83,6 +86,10 @@ RUN apt-get -y update && \
 
 ```
 # Add your commands here
+vim Dockerfile
+git add Dockerfile
+git commit -m "init Dockerfile"
+git push
 ```
 
 ## Build and push Docker image
@@ -93,6 +100,10 @@ RUN apt-get -y update && \
 
 ```
 # Add your commands here
+docker build .
+docker login
+docker tag sha256:25bb1140a04b131448a4874641981bfec12d16906c6a382100e65d6a2d9a6dcf xueqidang/computational-workflows
+docker push xueqidang/computational-workflows
 ```
 
 ## Run a container, and share in files from the host.
@@ -103,6 +114,7 @@ RUN apt-get -y update && \
 
 ```
 # Add your commands here
+docker run -ti -v $(pwd):/root/shared xueqidang/computational-workflows:latest bash
 ```
 
 ## Setup a simple Python test suite
@@ -114,6 +126,9 @@ RUN apt-get -y update && \
 
 ```
 # Add your commands here
+git add *py
+git commit -m "add test suite"
+git push
 ```
 
 2. Start a Docker container using your image and share your repository into a
@@ -121,6 +136,7 @@ RUN apt-get -y update && \
 
 ```
 # Add your commands here
+docker run -ti -v $(pwd):/root/shared xueqidang/computational-workflows:latest bash
 ```
 
 3. Run the tests inside the container by going to `/root/shared` and running the
